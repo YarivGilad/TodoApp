@@ -5,7 +5,9 @@ import TodoItem from './TodoItem';
 import {TodoHeader} from './TodosHeader';
 
 export function TodoList() {
-  const todos = useAppSelector(state => state.todos.todoItems);
+  const todos = useAppSelector(state =>
+    state.todos.todoItems.filter(t => t.show),
+  );
 
   if (!todos.length) {
     return (
@@ -16,7 +18,6 @@ export function TodoList() {
   }
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Todo List</Text> */}
       <TodoHeader />
 
       <FlatList

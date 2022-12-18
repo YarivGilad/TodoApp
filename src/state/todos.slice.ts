@@ -7,12 +7,20 @@ export type Todo = {
   show: boolean;
 };
 
+export enum VisabilityFilter {
+  All = 'All',
+  Active = 'Active',
+  Completed = 'Completed',
+}
+
 export type TodosState = {
   todoItems: Todo[];
+  currentFilter: VisabilityFilter;
 };
 
 const initialState: TodosState = {
   todoItems: [],
+  currentFilter: VisabilityFilter.All,
 };
 
 const todosSlice = createSlice({
@@ -33,12 +41,30 @@ const todosSlice = createSlice({
       const todo = state.todoItems.find(t => t.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
+        todo.show = showHelper(todo, state.currentFilter);
       }
+    },
+    filterTodos(state, action: PayloadAction<VisabilityFilter>) {
+      state.currentFilter = action.payload;
+      state.todoItems.forEach((todo: Todo) => {
+        todo.show = showHelper(todo, action.payload);
+      });
     },
   },
 });
 
-export const {addTodo, toggleTodo} = todosSlice.actions;
+function showHelper(todo: Todo, filter: VisabilityFilter) {
+  switch (filter) {
+    case VisabilityFilter.All:
+      return true;
+    case VisabilityFilter.Active:
+      return todo.completed === false;
+    case VisabilityFilter.Completed:
+      return todo.completed === true;
+  }
+}
+
+export const {addTodo, toggleTodo, filterTodos} = todosSlice.actions;
 
 export default todosSlice.reducer;
 

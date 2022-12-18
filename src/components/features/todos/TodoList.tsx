@@ -12,7 +12,7 @@ export function TodoList() {
   if (!todos.length) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Start creating a new todo</Text>
+        <Text style={styles.title}>Start by creating a new todo</Text>
       </View>
     );
   }

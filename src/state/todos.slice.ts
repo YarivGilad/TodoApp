@@ -29,7 +29,7 @@ const todosSlice = createSlice({
   reducers: {
     addTodo(state, action: PayloadAction<string>) {
       console.log('addTodo::' + action.payload);
-      state.todoItems.push({
+      state.todoItems.unshift({
         id: uid(),
         title: action.payload,
         completed: false,

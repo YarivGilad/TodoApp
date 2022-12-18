@@ -50,6 +50,12 @@ const todosSlice = createSlice({
         todo.show = showHelper(todo, action.payload);
       });
     },
+    removeTodo(state, action: PayloadAction<string>) {
+      const index = state.todoItems.findIndex(
+        (todo: Todo) => todo.id === action.payload,
+      );
+      state.todoItems.splice(index, 1);
+    },
   },
 });
 
@@ -64,7 +70,8 @@ function showHelper(todo: Todo, filter: VisabilityFilter) {
   }
 }
 
-export const {addTodo, toggleTodo, filterTodos} = todosSlice.actions;
+export const {addTodo, toggleTodo, filterTodos, removeTodo} =
+  todosSlice.actions;
 
 export default todosSlice.reducer;
 

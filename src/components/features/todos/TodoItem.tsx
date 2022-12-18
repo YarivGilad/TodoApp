@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {Todo, toggleTodo} from '../../../state/todos.slice';
+import {Todo, toggleTodo, removeTodo} from '../../../state/todos.slice';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import {COLORS} from '../../../constants/style.constants';
@@ -26,7 +26,9 @@ const TodoItem: FC<IProps> = ({index, id, completed, title}) => {
         onPress={() => dispatch(toggleTodo(id))}
         isChecked={completed}
       />
-      <Icon name="remove" size={26} color={COLORS.error} />
+      <Pressable onPress={() => dispatch(removeTodo(id))}>
+        <Icon name="remove" size={26} color={COLORS.error} />
+      </Pressable>
     </View>
   );
 };

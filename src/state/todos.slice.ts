@@ -56,6 +56,11 @@ const todosSlice = createSlice({
       );
       state.todoItems.splice(index, 1);
     },
+    removeCompleted(state) {
+      state.todoItems = state.todoItems.filter(
+        (todo: Todo) => todo.completed === false,
+      );
+    },
   },
 });
 
@@ -70,7 +75,7 @@ function showHelper(todo: Todo, filter: VisabilityFilter) {
   }
 }
 
-export const {addTodo, toggleTodo, filterTodos, removeTodo} =
+export const {addTodo, toggleTodo, filterTodos, removeTodo, removeCompleted} =
   todosSlice.actions;
 
 export default todosSlice.reducer;

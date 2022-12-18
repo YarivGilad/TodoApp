@@ -1,8 +1,15 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {useAppDispatch, useAppSelector} from '../../../state/store';
-import {filterTodos, Todo, VisabilityFilter} from '../../../state/todos.slice';
+import {
+  filterTodos,
+  removeCompleted,
+  Todo,
+  VisabilityFilter,
+} from '../../../state/todos.slice';
+import {COLORS} from '../../../constants/style.constants';
 
 export const TodoHeader: FC = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +22,9 @@ export const TodoHeader: FC = () => {
 
   return (
     <View style={styles.container}>
+      <Pressable onPress={() => dispatch(removeCompleted())}>
+        <Icon name="recycle" size={26} color={COLORS.tertiaryDark} />
+      </Pressable>
       <Text style={styles.title}>Todo List ({activeCount})</Text>
 
       <RNPickerSelect
@@ -44,7 +54,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginVertical: 12,
+    marginVertical: 20,
+    paddingHorizontal: 10,
   },
   title: {
     fontSize: 20,

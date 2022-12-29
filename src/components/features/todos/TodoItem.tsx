@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Todo, toggleTodo, removeTodo} from '../../../state/todos.slice';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,7 +15,9 @@ const TodoItem: FC<IProps> = ({index, id, completed, title}) => {
   const backgroundColor = index % 2 !== 0 ? COLORS.secondaryLight : 'white';
 
   return (
-    <View style={{...styles.container, backgroundColor}}>
+    <View
+      accessibilityLabel="todo-item"
+      style={{...styles.container, backgroundColor}}>
       <BouncyCheckbox
         size={30}
         fillColor={COLORS.primary}

@@ -1,15 +1,16 @@
 import React, {FC} from 'react';
-import {Pressable, StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, Pressable, PressableProps} from 'react-native';
 import {COLORS} from '../../constants/style.constants';
 
-interface IProps {
+interface IProps extends PressableProps {
   label: string;
   onPress: () => void;
 }
 
-export const Button: FC<IProps> = ({label, onPress}) => {
+export const Button: FC<IProps> = ({label, onPress, ...props}) => {
   return (
     <Pressable
+      {...props}
       onPress={onPress}
       style={({pressed}) =>
         pressed ? [styles.button, styles.buttonPressed] : styles.button

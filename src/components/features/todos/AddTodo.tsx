@@ -25,7 +25,7 @@ const AddTodo: FC = () => {
         style={styles.input}
         onChangeText={setTodoTitle}
       />
-      <Button label="+" onPress={createTodo} />
+      <Button label="+" onPress={createTodo} testID="add-btn" />
     </View>
   );
 };

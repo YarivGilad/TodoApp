@@ -78,7 +78,7 @@ function showHelper(todo: Todo, filter: VisabilityFilter) {
 export const {addTodo, toggleTodo, filterTodos, removeTodo, removeCompleted} =
   todosSlice.actions;
 
-export default todosSlice.reducer;
+export default todosSlice;
 
 const uid = () => Math.random().toString(36).slice(2, 8);
 
